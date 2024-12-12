@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<style>
+    div.page {
+        padding: 5px 5px;
+        display: inline-block;
+    }
+    div.page a.active {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    th{
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+    }
+    tr{
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+    }
+
+    td{
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Candidates</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div th:switch="${candidates}" >
+    <h2 th:case="null">No candidates yet!</h2>
+    <div th:case="*">
+        <h1 class="text-center">LIST CANDIDATES NO PAGING</h1>
+        <a class="btn btn-primary " href="/show-add-form">Insert</a>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Full Name</th>
+                <th>DOB</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="candidate : ${candidates}">
+                <td th:text="${candidate.id}"></td>
+                <td th:text="${candidate.fullName}"></td>
+                <td th:text="${candidate.dob}"></td>
+                <td th:text="${candidate.address}"></td>
+                <td th:text="${candidate.phone}"></td>
+                <td th:text="${candidate.email}"></td>
+                <td><a class="btn btn-success" th:href="@{/show-edit-form/{id}(id=${candidate.id})}">Update</a></td>
+                <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${candidate.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
