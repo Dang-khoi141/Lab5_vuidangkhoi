@@ -54,4 +54,21 @@ public class CandidateController {
         return "candidate/candidateList";
     }
 
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView edit(@PathVariable("id") long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        Optional<Candidate> opt = candidateRepository.findById(id);
+        if (opt.isPresent()) {
+            Candidate candidate = opt.get();
+            modelAndView.addObject("candidate", candidate);
+            modelAndView.addObject("address", candidate.getAddress());
+            modelAndView.addObject("countries", CountryCode.values());
+            modelAndView.setViewName("candidate/updateCandidate");
+        } else {
+            modelAndView.setViewName("error"); // Trang lỗi nếu không tìm thấy Candidate
+        }
+        return modelAndView;
+    }
+
 }

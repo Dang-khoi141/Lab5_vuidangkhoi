@@ -9,7 +9,7 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
     <style>
-        .x{
+        .x {
             position: fixed;
             padding: 1.5rem;
             margin-right: 10px;
@@ -21,10 +21,10 @@
     </style>
 </head>
 <body>
-<h1 th:align="center">UPDATE CANDIDATE</h1>
+<h1 style="text-align: center;">UPDATE CANDIDATE</h1>
 <div class="x">
-    <form action="#" th:action="@{/candidates/updateCandidate}" th:object="${candidate}" method="post">
-        <input type="hidden" th:field="${candidate.id}" />
+    <form th:action="@{/candidates/updateCandidate}" th:object="${candidate}" method="post">
+        <input type="hidden" th:field="*{id}" />
         <div class="row mb-3">
             <label for="name" class="col-sm-1 col-form-label">Name</label>
             <div class="col-sm-10">
@@ -52,29 +52,29 @@
 
         <div class="row g-1" aria-label="Address">
             <label class="col-sm-1 col-form-label">Address</label>
-            <input type="hidden" th:field="${address.id}" />
+            <input type="hidden" th:field="*{address.id}" />
             <div class="col-sm-1">
-                <input type="text" class="form-control" placeholder="Number" aria-label="Number" th:field="${address.number}">
+                <input type="text" class="form-control" placeholder="Number" aria-label="Number" th:field="*{address.number}">
             </div>
             <div class="col-sm-2">
-                <input type="text" class="form-control" placeholder="Street" aria-label="Street" th:field="${address.street}">
+                <input type="text" class="form-control" placeholder="Street" aria-label="Street" th:field="*{address.street}">
             </div>
             <div class="col-sm-1">
-                <input type="text" class="form-control" placeholder="City" aria-label="City" th:field="${address.city}">
+                <input type="text" class="form-control" placeholder="City" aria-label="City" th:field="*{address.city}">
             </div>
             <div class="col-sm-1">
-                <input type="text" class="form-control" placeholder="Zip code" aria-label="Zip" th:field="${address.zipCode}">
+                <input type="text" class="form-control" placeholder="Zip code" aria-label="Zip" th:field="*{address.zipcode}">
             </div>
             <div class="col-sm-1 text-right">
                 <label class="col-auto col-form-label">Country</label>
             </div>
             <div class="col-auto">
-                <select class="form-select"  th:field="${address.country}" id="address_country" aria-label="Country">
+                <select class="form-select" th:field="*{address.country}" id="address_country" aria-label="Country">
                     <option th:each="country : ${countries}" th:value="${country}" th:text="${country.name}"></option>
                 </select>
             </div>
         </div>
-        <br/>
+        <br />
         <div class="d-grid gap-2 col-3 mx-auto">
             <input class="btn btn-primary" type="submit" value="Update Candidate">
         </div>
