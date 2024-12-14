@@ -86,4 +86,15 @@ public class CandidateController {
         candidateRepository.save(candidate);
         return "redirect:/candidates";
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") long id) {
+        try{
+            candidateRepository.deleteById(id);
+        }catch (Exception e){
+            throw new RuntimeException("Error deleting candidate: " + e.getMessage(), e);
+        }
+        return "redirect:/candidates";
+    }
+
 }
