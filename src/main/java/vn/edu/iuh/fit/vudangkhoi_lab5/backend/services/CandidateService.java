@@ -17,7 +17,7 @@ public class CandidateService {
     public CandidateService(CandidateRepository candidateRepository) {
         this.candidateRepository = candidateRepository;
     }
-//    private CandidateRepository candidateRepository;
+
     public Page<Candidate> findAll(int pageNo, int pageSize, String sortBy, String sortDirection){
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
         Pageable pageable = PageRequest.of(pageNo, pageSize, sort);

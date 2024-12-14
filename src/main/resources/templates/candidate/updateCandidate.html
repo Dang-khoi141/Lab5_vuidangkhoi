@@ -52,24 +52,24 @@
 
         <div class="row g-1" aria-label="Address">
             <label class="col-sm-1 col-form-label">Address</label>
-            <input type="hidden" th:field="*{address.id}" />
+            <input type="hidden" th:field="${address.id}" />
             <div class="col-sm-1">
-                <input type="text" class="form-control" placeholder="Number" aria-label="Number" th:field="*{address.number}">
+                <input type="text" class="form-control" placeholder="Number"  aria-label="Number" th:field="${address.number}">
             </div>
             <div class="col-sm-2">
-                <input type="text" class="form-control" placeholder="Street" aria-label="Street" th:field="*{address.street}">
+                <input type="text" class="form-control" placeholder="Street" aria-label="Street" th:field="${address.street}">
             </div>
             <div class="col-sm-1">
-                <input type="text" class="form-control" placeholder="City" aria-label="City" th:field="*{address.city}">
+                <input type="text" class="form-control" placeholder="City" aria-label="City" th:field="${address.city}">
             </div>
             <div class="col-sm-1">
-                <input type="text" class="form-control" placeholder="Zip code" aria-label="Zip" th:field="*{address.zipcode}">
+                <input type="text" class="form-control" placeholder="Zip code" aria-label="Zip" th:field="${address.zipcode}">
             </div>
             <div class="col-sm-1 text-right">
                 <label class="col-auto col-form-label">Country</label>
             </div>
             <div class="col-auto">
-                <select class="form-select" th:field="*{address.country}" id="address_country" aria-label="Country">
+                <select class="form-select" th:field="${address.country}" id="address_country" aria-label="Country">
                     <option th:each="country : ${countries}" th:value="${country}" th:text="${country.name}"></option>
                 </select>
             </div>

@@ -1,6 +1,8 @@
 package vn.edu.iuh.fit.vudangkhoi_lab5.frontend.controllers;
 
 import com.neovisionaries.i18n.CountryCode;
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Slf4j
 @Controller
 public class CandidateController {
     @Autowired
@@ -71,4 +74,16 @@ public class CandidateController {
         return modelAndView;
     }
 
+    @Transactional
+    @PostMapping("candidates/updateCandidate")
+    public String updateCandidate(
+            @ModelAttribute("candidate") Candidate candidate,
+            @ModelAttribute("address") Address address,
+            BindingResult result, Model model
+    ){
+        addressRepository.save(address);
+        candidate.setAddress(address);
+        candidateRepository.save(candidate);
+        return "redirect:/candidates";
+    }
 }
