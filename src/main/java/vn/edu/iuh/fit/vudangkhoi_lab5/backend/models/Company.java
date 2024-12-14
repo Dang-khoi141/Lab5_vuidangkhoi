@@ -2,15 +2,20 @@ package vn.edu.iuh.fit.vudangkhoi_lab5.backend.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "company")
+@NoArgsConstructor
 public class Company {
     @Id
-    @Column(name = "comp_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "comp_id", columnDefinition = "bigint(20)") // Đảm bảo tên cột là comp_id
     private Long id;
 
     @Column(name = "about", length = 2000)
@@ -32,4 +37,30 @@ public class Company {
     @JoinColumn(name = "address", nullable = false)
     private Address address;
 
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    private List<Job> jobs;
+
+    public Company(String about, String email, String compName, String phone, String webUrl, Address address, List<Job> jobs) {
+        this.about = about;
+        this.email = email;
+        this.compName = compName;
+        this.phone = phone;
+        this.webUrl = webUrl;
+        this.address = address;
+        this.jobs = jobs;
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", about='" + about + '\'' +
+                ", email='" + email + '\'' +
+                ", compName='" + compName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", webUrl='" + webUrl + '\'' +
+                ", address=" + address +
+                ", jobs=" + jobs +
+                '}';
+    }
 }

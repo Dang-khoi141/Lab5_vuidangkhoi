@@ -3,12 +3,14 @@ package vn.edu.iuh.fit.vudangkhoi_lab5.backend.models;
 import com.neovisionaries.i18n.CountryCode;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "address")
+@NoArgsConstructor
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,17 +22,23 @@ public class Address {
 
     @Column(name = "city", length = 50)
     private String city;
-
     @Column(name = "country", columnDefinition = "smallint(6)")
     private CountryCode country = CountryCode.VN;
 
     @Column(name = "number", length = 20)
     private String number;
 
+
     @Column(name = "zipcode", length = 7)
     private String zipcode;
 
-
+    public Address(String street, String city, String number, String zipcode,CountryCode country) {
+        this.street = street;
+        this.city = city;
+        this.number = number;
+        this.country = country;
+        this.zipcode = zipcode;
+    }
 
     @Override
     public String toString() {

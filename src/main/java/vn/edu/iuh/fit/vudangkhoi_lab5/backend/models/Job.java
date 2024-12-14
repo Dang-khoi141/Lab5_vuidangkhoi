@@ -26,4 +26,5 @@ public class Job {
     @Column(name = "com_id")
     private Long comId;
 
+
 }
