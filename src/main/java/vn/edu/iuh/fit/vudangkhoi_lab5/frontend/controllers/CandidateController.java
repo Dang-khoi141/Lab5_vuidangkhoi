@@ -1,6 +1,7 @@
 package vn.edu.iuh.fit.vudangkhoi_lab5.frontend.controllers;
 
 import com.neovisionaries.i18n.CountryCode;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,28 @@ public class CandidateController {
         }catch (Exception e){
             throw new RuntimeException("Error deleting candidate: " + e.getMessage(), e);
         }
+        return "redirect:/candidates";
+    }
+    @GetMapping("/show-add-form")
+    public ModelAndView add(){
+        ModelAndView modelAndView = new ModelAndView();
+        Candidate candidate = new Candidate();
+        candidate.setAddress(new Address());
+        modelAndView.addObject("candidate", candidate);
+        modelAndView.addObject("address", candidate.getAddress());
+        modelAndView.addObject("countries", CountryCode.values());
+        modelAndView.setViewName("candidate/addCandidate");
+        return modelAndView;
+    }
+    @PostMapping("candidates/addCandidate")
+    public String addCandidate(
+            @ModelAttribute("candidate") Candidate candidate,
+            @ModelAttribute("address") Address address,
+            BindingResult result, Model model
+    ){
+        addressRepository.save(address);
+        candidate.setAddress(address);
+        candidateRepository.save(candidate);
         return "redirect:/candidates";
     }
 
