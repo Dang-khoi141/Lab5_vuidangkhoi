@@ -2,13 +2,17 @@ package vn.edu.iuh.fit.vudangkhoi_lab5.backend.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import vn.edu.iuh.fit.vudangkhoi_lab5.backend.enums.SkillLevel;
 import vn.edu.iuh.fit.vudangkhoi_lab5.backend.ids.JobSkillId;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "job_skill")
+@NoArgsConstructor
 public class JobSkill {
     @EmbeddedId
     private JobSkillId id;
@@ -19,15 +23,16 @@ public class JobSkill {
     private Job job;
 
     @MapsId("skillId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "skill_id", nullable = false)
     private Skill skill;
 
     @Column(name = "more_infos", length = 1000)
     private String moreInfos;
 
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "skill_level")
-    private String skillLevel;
+    private SkillLevel skillLevel;
+
 
 }

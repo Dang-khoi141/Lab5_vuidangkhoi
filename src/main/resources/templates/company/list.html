@@ -49,7 +49,12 @@
             <td th:text="${company.webUrl}"></td>
             <td th:text="${company.about}"></td>
             <td th:text="${company.address}"></td>
-<!--            <td><a class="btn btn-primary" th:href="@{/companies/{companyId}/jobs(companyId=${company.id})}">View detail</a></td>-->
+            <td>
+                <a class="btn btn-primary" th:href="@{/{companyId}/job(companyId=${company.id})}">
+                    View detail
+                </a>
+            </td>
+
         </tr>
         </tbody>
     </table>

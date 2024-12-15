@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -38,7 +39,7 @@ public class Company {
     private Address address;
 
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    private List<Job> jobs;
+    private List<Job> jobs = new ArrayList<>(); // Khởi tạo danh sách tại đây
 
     public Company(String about, String email, String compName, String phone, String webUrl, Address address, List<Job> jobs) {
         this.about = about;
@@ -47,7 +48,7 @@ public class Company {
         this.phone = phone;
         this.webUrl = webUrl;
         this.address = address;
-        this.jobs = jobs;
+        this.jobs = (jobs != null) ? jobs : new ArrayList<>(); // Khởi tạo danh sách nếu nó null
     }
 
     @Override
